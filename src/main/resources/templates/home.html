@@ -5,6 +5,10 @@
     <title>Calcul de distance</title>
 </head>
 <body>
-e
+    <div class="listeContainer">
+        <div th:each="ville: ${villes}" class="villeContainer">
+            <div th:text="${ville.nomCommune}"></div>
+        </div>
+    </div>
 </body>
 </html>

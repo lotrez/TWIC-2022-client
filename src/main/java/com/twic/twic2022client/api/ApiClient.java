@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ApiClient {
@@ -34,9 +35,11 @@ public class ApiClient {
             reader.close();
         }
         System.out.println("response code: " + status);
+        System.out.println("response string: " + responseContent.toString());
         ObjectMapper mapper = new ObjectMapper();
-
-        return mapper.readValue(responseContent.toString(), new TypeReference<List<Ville>>(){});
+        List<Ville> villes = new ArrayList<>();
+        villes = mapper.readValue(responseContent.toString(), new TypeReference<List<Ville>>(){});
+        return villes;
     }
 
 }
