@@ -1,4 +1,4 @@
-package com.twic.twic2022client;
+package com.twic.twic2022client.api;
 
 import lombok.Getter;
 import lombok.Setter;
