@@ -7,8 +7,20 @@
 <body>
     <div class="listeContainer">
         <div th:each="ville: ${villes}" class="villeContainer">
-            <div th:text="${ville.nomCommune}"></div>
+            <div class="ville" th:text="${ville.nomCommune}" th:onclick="'javascript:selectVille(' + ${ville.codeCommuneINSEE} + ', 0)'"></div>
+        </div>
+    </div>    <div class="listeContainer">
+        <div th:each="ville: ${villes}" class="villeContainer">
+            <div class="ville" th:text="${ville.nomCommune}" th:onclick="'javascript:selectVille(' + ${ville.codeCommuneINSEE} + ', 1)'"></div>
         </div>
     </div>
 </body>
+<script>
+    var villesSelectID = [];
+    var villesSelectNom = [];
+    function selectVille(codeCommune, index) {
+        villesSelectID[index] = codeCommune;
+        villesSelectNom[index] = codeCommune;
+    }
+</script>
 </html>
