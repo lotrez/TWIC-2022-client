@@ -1,0 +1,24 @@
+.pageContainer {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+    align-items: start;
+}
+
+.villeContainer {
+    margin: 8px;
+    cursor: pointer;
+}
+
+body {
+    font-family: 'Roboto Light', sans-serif;
+}
+
+.currentSelectionContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin: 8px;
+}

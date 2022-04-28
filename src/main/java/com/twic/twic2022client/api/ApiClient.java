@@ -13,7 +13,7 @@ import java.util.List;
 
 public class ApiClient {
     public static List<Ville> getVilles() throws IOException {
-        URL url = new URL("http://localhost:8081/ville");
+        URL url = new URL("http://localhost:8081/villes");
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
         con.setRequestMethod("GET");
         int status = con.getResponseCode();
@@ -37,7 +37,7 @@ public class ApiClient {
         System.out.println("response code: " + status);
         System.out.println("response string: " + responseContent.toString());
         ObjectMapper mapper = new ObjectMapper();
-        List<Ville> villes = new ArrayList<>();
+        List<Ville> villes;
         villes = mapper.readValue(responseContent.toString(), new TypeReference<List<Ville>>(){});
         return villes;
     }
