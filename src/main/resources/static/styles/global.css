@@ -17,8 +17,43 @@ body {
 
 .currentSelectionContainer {
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    flex-direction: column;
+    justify-content: start;
     align-items: center;
     margin: 8px;
+}
+
+.villeDisplay {
+    margin: 10px;
+    width: 100%;
+}
+
+.containerStyle {
+    background: rgb(20,39,78);
+    background: linear-gradient(167deg, rgba(20,39,78,1) 0%, rgba(107,107,107,1) 100%);
+    border-radius: 10px;
+    box-shadow: black 0px 0px 10px;
+    color: white;
+}
+
+.prop {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    margin: 10px;
+}
+
+.propName {
+    font-weight: bolder;
+    margin-right: 10px;
+}
+
+.distanceContainer {
+    width: 100%;
+    color: white;
+    font-weight: bolder;
+}
+
+.distance {
+    margin: 10px;
 }
