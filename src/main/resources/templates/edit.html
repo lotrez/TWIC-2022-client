@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href="http://fonts.cdnfonts.com/css/roboto" rel="stylesheet">
+  <link rel="stylesheet" th:href="@{/styles/global.css}">
+  <meta charset="UTF-8">
+  <title>Édition/Suppression</title>
+</head>
+<body>
+<div class="pageContainer">
+  <div class="listeContainer">
+    <div th:each="ville: ${villes}" class="villeContainer">
+      <div class="ville" th:text="${ville.nomCommune}" th:attr="onclick=${'selectVille(&quot;'+ville.codeCommuneINSEE+'&quot;,0)'}"></div>
+    </div>
+  </div>
+  <div class="currentSelectionContainer">
+    <div id="ville0" class="villeDisplay">
+
+    </div>
+  </div>
+</div>
+</body>
+<script>
+  var villesSelectID = [];
+  var villesSelectNom = [];
+  function selectVille(codeCommune, index) {
+    villesSelectID[index] = codeCommune;
+    villesSelectNom[index] = codeCommune;
+    loadVille(codeCommune, index);
+  }
+
+  function loadVille(codeCommune, index){
+    console.log(codeCommune)
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        // Typical action to be performed when the document is ready:
+        document.getElementById("ville"+index).innerHTML = "";
+        const parsed = JSON.parse(xhttp.responseText);
+        for (let prop in parsed) {
+          document.getElementById("ville"+index).innerHTML = document.getElementById("ville"+index).innerHTML + "<div>" + prop + ": " + parsed[prop] + "</div>";
+          console.log(prop)
+        }
+      }
+    };
+    xhttp.open("GET", "http://localhost:8081/ville?codeCommuneInsee=".concat(codeCommune.toString()), true);
+    xhttp.send();
+  }
+</script>
+</html>
