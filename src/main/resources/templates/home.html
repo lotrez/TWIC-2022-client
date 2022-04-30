@@ -68,6 +68,10 @@
         xhttp.send();
     }
 
+    function redirectToEdit(codeCommune){
+        window.location.href = "http://localhost:8080/edit?codeCommuneINSEE=" + codeCommune
+    }
+
     function calculerDistance(){
         lon1 =  villesSelect[0].longitude * Math.PI / 180;
         lon2 = villesSelect[1].longitude * Math.PI / 180;
