@@ -40,6 +40,20 @@ public class ApiClient {
         return mapper.readValue(response.body().string(), new TypeReference<Ville>(){});
     }
 
+    public static List<Ville> getVillesPage(Integer page) throws IOException {
+        OkHttpClient client = new OkHttpClient().newBuilder()
+                .build();
+        Request request = new Request.Builder()
+                .url("http://localhost:8081/villes?page=" + page)
+                .method("GET", null)
+                .build();
+        Response response = client.newCall(request).execute();
+        ObjectMapper mapper = new ObjectMapper();
+        List<Ville> villes;
+        villes = mapper.readValue(response.body().string(), new TypeReference<List<Ville>>(){});
+        return villes;
+    }
+
     public static void modifierVille(
             String currentCodeCommune,
             String codeCommuneINSEE,
