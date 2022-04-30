@@ -1,50 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link href="http://fonts.cdnfonts.com/css/roboto" rel="stylesheet">
-  <link rel="stylesheet" th:href="@{/styles/global.css}">
-  <meta charset="UTF-8">
-  <title>Édition/Suppression</title>
+    <link href="http://fonts.cdnfonts.com/css/roboto" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/styles/edit.css}">
+    <meta charset="UTF-8">
+    <title>Édition/Suppression</title>
 </head>
 <body>
-<div class="pageContainer">
-  <div class="listeContainer">
-    <div th:each="ville: ${villes}" class="villeContainer">
-      <div class="ville" th:text="${ville.nomCommune}" th:attr="onclick=${'selectVille(&quot;'+ville.codeCommuneINSEE+'&quot;,0)'}"></div>
-    </div>
-  </div>
-  <div class="currentSelectionContainer">
-    <div id="ville0" class="villeDisplay">
-
-    </div>
-  </div>
+<div id="divTitle">
+    <h1 id="title1" th:inline="text">Modification de la commune : [[${currentVille.nomCommune}]]</h1>
 </div>
-</body>
-<script>
-  var villesSelectID = [];
-  var villesSelectNom = [];
-  function selectVille(codeCommune, index) {
-    villesSelectID[index] = codeCommune;
-    villesSelectNom[index] = codeCommune;
-    loadVille(codeCommune, index);
-  }
+<form id="mainForm" method="post">
+    <label for="currentCodeCommune" type="hidden">
+        <input type="hidden" name="currentCodeCommune" id="currentCodeCommune" th:value="${currentVille.codeCommuneINSEE}">
+    </label>
+    <label for="codeCommuneINSEE">Code commune :
+        <input name="codeCommuneINSEE" id="codeCommuneINSEE" type="text" th:value="${currentVille.codeCommuneINSEE}">
+    </label >
+    <label for="nomCommune"> Nom commune :
+        <input name="nomCommune" id="nomCommune" type="text" th:value="${currentVille.nomCommune}">
+    </label>
+    <label for="codePostal">Code Postal :
+        <input name="codePostal" id="codePostal" type="text" th:value="${currentVille.codePostal}">
+    </label>
+    <label for="libelleAcheminement">Libellé d'acheminement :
+        <input name="libelleAcheminement" id="libelleAcheminement" type="text" th:value="${currentVille.libelleAcheminement}">
+    </label>
+    <label for="ligne5">Ligne 5 :
+        <input name="ligne5" id="ligne5" type="text" th:value="${currentVille.ligne5}">
+    </label>
+    <label for="latitude">Latitude :
+        <input name="latitude" id="latitude" type="text" th:value="${currentVille.latitude}">
+    </label>
+    <label for="longitude">Longitude :
+        <input name="longitude" id="longitude" type="text" th:value="${currentVille.longitude}">
+    </label>
 
-  function loadVille(codeCommune, index){
-    console.log(codeCommune)
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200) {
-        // Typical action to be performed when the document is ready:
-        document.getElementById("ville"+index).innerHTML = "";
-        const parsed = JSON.parse(xhttp.responseText);
-        for (let prop in parsed) {
-          document.getElementById("ville"+index).innerHTML = document.getElementById("ville"+index).innerHTML + "<div>" + prop + ": " + parsed[prop] + "</div>";
-          console.log(prop)
+    <button type="submit">Sauvegarder</button>
+    <button type="button" onclick="deleteCommune()">Supprimer</button>
+
+</form>
+</body>
+
+<script>
+    function saveCurrentCodeCommune(){
+        document.getElementById('mainForm');
+        form.onsubmit = function (e) {
+            e.preventDefault();
+            fetch(form.action, {
+                method: "post",
+                body: new FormData(form)
+            });
         }
-      }
-    };
-    xhttp.open("GET", "http://localhost:8081/ville?codeCommuneInsee=".concat(codeCommune.toString()), true);
-    xhttp.send();
-  }
+    }
+
+    function deleteCommune(){
+
+    }
 </script>
+
+
 </html>

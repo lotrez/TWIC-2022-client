@@ -57,3 +57,22 @@ body {
 .distance {
     margin: 10px;
 }
+
+.editSingleCommune {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top : 10px;
+    margin-bottom : 10px;
+}
+
+#editButton {
+    background-color: white;
+    color: rgba(20,39,78,1);
+    padding: 3px;
+    border-radius: 3px;
+    box-shadow: 1px 1px 1px darkgray;
+}
+#editButton:hover {
+    transform: scale(105%);
+}

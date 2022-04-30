@@ -54,12 +54,17 @@
                         "<div class='prop'><div class='propName'>" + prop + ": </div><div class='propValue'>" + parsed[prop] + "</div></div>";
                     console.log(prop)
                 }
+                document.getElementById("ville"+index).innerHTML = document.getElementById("ville"+index).innerHTML +
+                    "<div class='editSingleCommune'>" +
+                    "<button id='editButton' class='editButton' type='submit' onClick='redirectToEdit(&quot;".concat(codeCommune) + "&quot;)'>Edit</button>" +
+                    "</div>";
+
                 if(villesSelect[0] && villesSelect[1]){
                     calculerDistance();
                 }
             }
         };
-        xhttp.open("GET", "http://localhost:8081/ville?codeCommuneInsee=".concat(codeCommune.toString()), true);
+        xhttp.open("GET", "http://localhost:8081/ville?codeCommuneINSEE=".concat(codeCommune.toString()), true);
         xhttp.send();
     }
 

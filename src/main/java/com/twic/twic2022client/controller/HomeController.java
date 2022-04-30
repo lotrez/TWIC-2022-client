@@ -16,9 +16,9 @@ public class HomeController {
     @GetMapping("/")
     public String home(Model model) throws IOException, JSONException {
         List<Ville> villes = ApiClient.getVilles();
-        for (Ville ville: villes) {
-            System.out.println(ville.getNomCommune());
-        }
+//        for (Ville ville: villes) {
+//            System.out.println(ville.getNomCommune());
+//        }
         model.addAttribute("villes", villes);
         return "/home";
     }
