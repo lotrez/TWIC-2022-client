@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="http://fonts.cdnfonts.com/css/roboto" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/styles/global.css}">
+    <meta charset="UTF-8">
+    <title>Liste de villes éditables</title>
+</head>
+<body>
+<div class="listeContainer containerStyle">
+    <div th:each="ville: ${villes}" class="villeContainer">
+        <div class="ville" th:text="${ville.nomCommune}" th:attr="onclick=${'redirectToEdit(&quot;'+ville.codeCommuneINSEE+'&quot;)'}"></div>
+    </div>
+    <button th:attr="onclick=${'goToPage('+page+'-1)'}">Page d'avant</button>
+    <button th:attr="onclick=${'goToPage('+page+'+1)'}">Page d'après</button>
+</div>
+</body>
+<script>
+    function goToPage(page) {
+        window.location.href = "liste?page=" + page;
+    }
+    function redirectToEdit(codeCommune){
+        window.location.href = "http://localhost:8080/edit?codeCommuneINSEE=" + codeCommune
+    }
+</script>
