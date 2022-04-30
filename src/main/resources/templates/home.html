@@ -8,11 +8,13 @@
 </head>
 <body>
     <div class="pageContainer">
-        <div class="listeContainer containerStyle">
-            <div th:each="ville: ${villes}" class="villeContainer">
-                <div class="ville" th:text="${ville.nomCommune}" th:attr="onclick=${'selectVille(&quot;'+ville.codeCommuneINSEE+'&quot;,0)'}"></div>
-            </div>
-        </div>
+        <label>
+            Choisissez votre première ville
+            <input list="list1" onchange="loadVille(event.target.value, 0)">
+        </label>
+        <datalist class="listeContainer containerStyle" id="list1" >
+            <option th:value="${ville.nomCommune}" th:each="ville: ${villes}" class="villeContainer" onclick="console.log('click')">
+        </datalist>
         <div class="currentSelectionContainer">
             <div id="ville0" class="villeDisplay containerStyle">
 
@@ -26,11 +28,13 @@
                 </div>
             </div>
         </div>
-        <div class="listeContainer containerStyle">
-            <div th:each="ville: ${villes}" class="villeContainer">
-                <div class="ville" th:text="${ville.nomCommune}" th:attr="onclick=${'selectVille(&quot;'+ville.codeCommuneINSEE+'&quot;,1)'}"></div>
-            </div>
-        </div>
+        <label>
+            Choisissez votre deuxième ville
+            <input list="list2" onchange="loadVille(event.target.value, 1)">
+        </label>
+        <datalist class="listeContainer containerStyle" id="list2" >
+            <option th:value="${ville.nomCommune}" th:each="ville: ${villes}" class="villeContainer" onclick="console.log('click')">
+        </datalist>
     </div>
 </body>
 <script>
@@ -39,8 +43,8 @@
         loadVille(codeCommune, index);
     }
 
-    function loadVille(codeCommune, index){
-        console.log(codeCommune)
+    function loadVille(nomCommune, index){
+        console.log(nomCommune)
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
@@ -58,7 +62,7 @@
                 loadWeather(parsed.latitude, parsed.longitude, index);
                 document.getElementById("ville"+index).innerHTML = document.getElementById("ville"+index).innerHTML +
                     "<div class='editSingleCommune'>" +
-                    "<button id='editButton' class='editButton' type='submit' onClick='redirectToEdit(&quot;".concat(codeCommune) + "&quot;)'>Edit</button>" +
+                    "<button id='editButton' class='editButton' type='submit' onClick='redirectToEdit(&quot;".concat(parsed.codeCommuneINSEE) + "&quot;)'>Edit</button>" +
                     "</div>";
 
                 if(villesSelect[0] && villesSelect[1]){
@@ -66,7 +70,7 @@
                 }
             }
         };
-        xhttp.open("GET", "http://localhost:8081/ville?codeCommuneINSEE=".concat(codeCommune.toString()), true);
+        xhttp.open("GET", "http://localhost:8081/ville?nomCommune=".concat(nomCommune.toString()), true);
         xhttp.send();
     }
 
