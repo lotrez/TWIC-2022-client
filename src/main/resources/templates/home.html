@@ -53,8 +53,9 @@
                         document.getElementById("ville"+index).innerHTML +
                         "<div class='prop'><div class='propName'>" + prop + ": </div><div class='propValue'>" + parsed[prop] + "</div></div>";
                     console.log(prop)
-                    loadWeather(parsed.lat, parsed.lon, index);
+                    console.log(parsed)
                 }
+                loadWeather(parsed.latitude, parsed.longitude, index);
                 document.getElementById("ville"+index).innerHTML = document.getElementById("ville"+index).innerHTML +
                     "<div class='editSingleCommune'>" +
                     "<button id='editButton' class='editButton' type='submit' onClick='redirectToEdit(&quot;".concat(codeCommune) + "&quot;)'>Edit</button>" +
@@ -103,10 +104,10 @@
                 const parsed = JSON.parse(xhttp.responseText);
                 // Typical action to be performed when the document is ready:
                 document.getElementById("ville"+index).innerHTML =
-                    document.getElementById("ville"+index).innerHTML + "température: " + parsed.main.temp + "°C";
+                    document.getElementById("ville"+index).innerHTML + "<div class='prop'><div class='propName'>Température: </div><div class='propValue'>" + parsed.main.temp + "°C</div></div>";
             }
         };
-        xhttp.open("GET", "https://api.openweathermap.org/data/2.5/weather?appid=502b658dae148ebfa43b6bda2b1efd9e%0A&lat=" + lat + "&lon=" + lon + "4&units=metric", true);
+        xhttp.open("GET", "https://api.openweathermap.org/data/2.5/weather?appid=502b658dae148ebfa43b6bda2b1efd9e&lat=" + lat + "&lon=" + lon + "4&units=metric", true);
         xhttp.send();
     }
 </script>
