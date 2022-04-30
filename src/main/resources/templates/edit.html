@@ -6,34 +6,32 @@
     <meta charset="UTF-8">
     <title>Édition/Suppression</title>
 </head>
+
 <body>
 <div id="divTitle">
     <h1 id="title1" th:inline="text">Modification de la commune : [[${currentVille.nomCommune}]]</h1>
 </div>
-<form id="mainForm" method="post">
-    <label for="currentCodeCommune" type="hidden">
-        <input type="hidden" name="currentCodeCommune" id="currentCodeCommune" th:value="${currentVille.codeCommuneINSEE}">
-    </label>
+<form id="addForm" method="post" th:object="${currentVille}">
     <label for="codeCommuneINSEE">Code commune :
-        <input name="codeCommuneINSEE" id="codeCommuneINSEE" type="text" th:value="${currentVille.codeCommuneINSEE}">
+        <input th:field="*{codeCommuneINSEE}" name="codeCommuneINSEE" id="codeCommuneINSEE" type="text" th:value="${currentVille.codeCommuneINSEE}">
     </label >
     <label for="nomCommune"> Nom commune :
-        <input name="nomCommune" id="nomCommune" type="text" th:value="${currentVille.nomCommune}">
+        <input th:field="*{nomCommune}" name="nomCommune" id="nomCommune" type="text" th:value="${currentVille.nomCommune}">
     </label>
     <label for="codePostal">Code Postal :
-        <input name="codePostal" id="codePostal" type="text" th:value="${currentVille.codePostal}">
+        <input th:field="*{codePostal}" name="codePostal" id="codePostal" type="text" th:value="${currentVille.codePostal}">
     </label>
     <label for="libelleAcheminement">Libellé d'acheminement :
-        <input name="libelleAcheminement" id="libelleAcheminement" type="text" th:value="${currentVille.libelleAcheminement}">
+        <input th:field="*{libelleAcheminement}" name="libelleAcheminement" id="libelleAcheminement" type="text" th:value="${currentVille.libelleAcheminement}">
     </label>
     <label for="ligne5">Ligne 5 :
-        <input name="ligne5" id="ligne5" type="text" th:value="${currentVille.ligne5}">
+        <input th:field="*{ligne5}" name="ligne5" id="ligne5" type="text" th:value="${currentVille.ligne5}">
     </label>
     <label for="latitude">Latitude :
-        <input name="latitude" id="latitude" type="text" th:value="${currentVille.latitude}">
+        <input th:field="*{latitude}" name="latitude" id="latitude" type="text" th:value="${currentVille.latitude}">
     </label>
     <label for="longitude">Longitude :
-        <input name="longitude" id="longitude" type="text" th:value="${currentVille.longitude}">
+        <input th:field="*{longitude}" name="longitude" id="longitude" type="text" th:value="${currentVille.longitude}">
     </label>
 
     <button type="submit">Sauvegarder</button>
