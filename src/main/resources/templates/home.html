@@ -53,6 +53,7 @@
                         document.getElementById("ville"+index).innerHTML +
                         "<div class='prop'><div class='propName'>" + prop + ": </div><div class='propValue'>" + parsed[prop] + "</div></div>";
                     console.log(prop)
+                    loadWeather(parsed.lat, parsed.lon, index);
                 }
                 document.getElementById("ville"+index).innerHTML = document.getElementById("ville"+index).innerHTML +
                     "<div class='editSingleCommune'>" +
@@ -73,6 +74,7 @@
     }
 
     function calculerDistance(){
+        //https://www.geeksforgeeks.org/program-distance-two-points-earth/#:~:text=For%20this%20divide%20the%20values,is%20the%20radius%20of%20Earth.
         lon1 =  villesSelect[0].longitude * Math.PI / 180;
         lon2 = villesSelect[1].longitude * Math.PI / 180;
         lat1 = villesSelect[0].latitude * Math.PI / 180;
@@ -92,6 +94,20 @@
 
         const distance = c * r;
         document.getElementById("distance").innerHTML = "distance: " + distance +" km";
+    }
+
+    function loadWeather(lat, lon, index){
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                const parsed = JSON.parse(xhttp.responseText);
+                // Typical action to be performed when the document is ready:
+                document.getElementById("ville"+index).innerHTML =
+                    document.getElementById("ville"+index).innerHTML + "température: " + parsed.main.temp + "°C";
+            }
+        };
+        xhttp.open("GET", "https://api.openweathermap.org/data/2.5/weather?appid=502b658dae148ebfa43b6bda2b1efd9e%0A&lat=" + lat + "&lon=" + lon + "4&units=metric", true);
+        xhttp.send();
     }
 </script>
 </html>
