@@ -40,7 +40,7 @@ public class ApiClient {
         });
     }
 
-    public static Ville addVille(Ville ville) throws IOException {
+    public static Ville editVille(Ville ville) throws IOException {
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
         MediaType mediaType = MediaType.parse("application/json");
@@ -77,45 +77,15 @@ public class ApiClient {
         return villes;
     }
 
-    public static void modifierVille(
-            String currentCodeCommune,
-            String codeCommuneINSEE,
-            String nomCommune,
-            String codePostal,
-            String libelleAcheminement,
-            String ligne5,
-            String latitude,
-            String longitude
-    ) throws IOException {
-        URL url = new URL("http://localhost:8081/ville?"
-                + "currentCodeCommune=" + currentCodeCommune
-                + "&codeCommuneINSEE=" + codeCommuneINSEE
-                + "&nomCommune=" + nomCommune
-                + "&codePostal=" + codePostal
-                + "&libelleAcheminement" + libelleAcheminement
-                + "&ligne5" + ligne5
-                + "&latitude" + latitude
-                + "&longitude" + longitude
-
-        );
-        HttpURLConnection con = (HttpURLConnection) url.openConnection();
-        con.setRequestMethod("PATCH");
-        int status = con.getResponseCode();
-        BufferedReader reader;
-        String line;
-        StringBuilder responseContent = new StringBuilder();
-        if (status >= 300) {
-            reader = new BufferedReader(new InputStreamReader(con.getErrorStream()));
-            while ((line = reader.readLine()) != null) {
-                responseContent.append(line);
-            }
-            reader.close();
-        } else {
-            reader = new BufferedReader(new InputStreamReader(con.getInputStream()));
-            while ((line = reader.readLine()) != null) {
-                responseContent.append(line);
-            }
-            reader.close();
-        }
+    public static void deleteVille(String codeCommuneINSEE) throws IOException {
+        OkHttpClient client = new OkHttpClient().newBuilder()
+                .build();
+        MediaType mediaType = MediaType.parse("text/plain");
+        RequestBody body = RequestBody.create(mediaType, "");
+        Request request = new Request.Builder()
+                .url("http://localhost:8081/ville?codeCommuneINSEE=" + codeCommuneINSEE)
+                .method("DELETE", body)
+                .build();
+        Response response = client.newCall(request).execute();
     }
 }

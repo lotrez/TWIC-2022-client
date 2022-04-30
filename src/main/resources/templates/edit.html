@@ -35,27 +35,24 @@
     </label>
 
     <button type="submit">Sauvegarder</button>
-    <button type="button" onclick="deleteCommune()">Supprimer</button>
 
 </form>
-</body>
+
+<button th:attr="onclick=${'deleteVille(&quot;'+currentVille.codeCommuneINSEE+'&quot;)'}">Supprimer</button>
 
 <script>
-    function saveCurrentCodeCommune(){
-        document.getElementById('mainForm');
-        form.onsubmit = function (e) {
-            e.preventDefault();
-            fetch(form.action, {
-                method: "post",
-                body: new FormData(form)
-            });
-        }
-    }
-
-    function deleteCommune(){
-
+    function deleteVille(codeCommuneINSEE){
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                window.location.href="/liste";
+            }
+        };
+        xhttp.open("DELETE", "http://localhost:8081/ville?codeCommuneINSEE=" + codeCommuneINSEE, true);
+        xhttp.send();
     }
 </script>
 
 
+</body>
 </html>
