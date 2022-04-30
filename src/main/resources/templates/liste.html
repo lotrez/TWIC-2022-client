@@ -1,3 +1,16 @@
-<tr th:each="ville: ${villes}">
-    <td th:text="${ville.nomCommune}" />
-</tr>
+<div class="listeContainer containerStyle">
+    <div th:each="ville: ${villes}" class="villeContainer">
+        <div class="ville" th:text="${ville.nomCommune}" th:attr="onclick=${'redirectToEdit(&quot;'+ville.codeCommuneINSEE+'&quot;)'}"></div>
+    </div>
+    <button th:attr="onclick=${'goToPage('+page+'-1)'}">Page d'avant</button>
+    <button th:attr="onclick=${'goToPage('+page+'+1)'}">Page d'après</button>
+</div>
+
+<script>
+    function goToPage(page) {
+        window.location.href = "liste?page=" + page;
+    }
+    function redirectToEdit(codeCommune){
+        window.location.href = "http://localhost:8080/edit?codeCommuneINSEE=" + codeCommune
+    }
+</script>
